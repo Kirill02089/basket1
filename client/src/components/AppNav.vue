@@ -14,9 +14,9 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <router-link class="navbar-item" to="/">Home</router-link>
+<!--        <router-link class="navbar-item" to="/">Home</router-link>-->
 
-        <router-link class="navbar-item" to="/about">About</router-link>
+<!--        <router-link class="navbar-item" to="/about">About</router-link>-->
       </div>
 
       <div class="navbar-end">
@@ -42,5 +42,7 @@
 </script>
 
 <style scoped>
-
+  .navbar {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1)
+  }
 </style>
