@@ -25,6 +25,12 @@
     </template>
 
     <template v-if="type === 'players'">
+      <b-field label="Топ по показателю:">
+        <b-select v-model="selected">
+          <option :value="option.value" v-for="option in options">{{option.title}}</option>
+        </b-select>
+      </b-field>
+
       <b-table hoverable
                :paginated="isPaginated"
                :per-page="perPage"
@@ -42,6 +48,9 @@
           </b-table-column>
           <b-table-column>
             {{row.fio}}
+          </b-table-column>
+          <b-table-column>
+            <b-tag rounded :type="getTagType(row.role)">{{options.find(r => r.value === row.role).title.toUpperCase()}}</b-tag>
           </b-table-column>
           <b-table-column>
             <span class="tag is-primary">{{row.kpd}}</span>
@@ -69,8 +78,10 @@
           <b-table-column>
             {{row.fio}}
           </b-table-column>
+          <b-table-column field="role">
+            {{row}}
+          </b-table-column>
           <b-table-column field="kpd">
-
             <span class="tag is-primary">{{row.kpd}}</span>
           </b-table-column>
         </template>
@@ -83,12 +94,14 @@
   import BTable from "buefy/src/components/table/Table";
   import BTableColumn from "buefy/src/components/table/TableColumn";
   import TeamForm from "./TeamForm";
-  import {Players, Teams} from "../store/data";
+  import {Players, Teams, Roles} from "../store/data";
+  import BField from "buefy/src/components/field/Field";
+  import BSelect from "buefy/src/components/select/Select";
 
   export default {
     name: "TopTable",
     props: ['type'],
-    components: {BTableColumn, BTable},
+    components: {BSelect, BField, BTableColumn, BTable},
     data() {
       return {
         isPaginated: true,
@@ -99,6 +112,8 @@
         teams: [...Teams],
         players: [...Players],
         games: [],
+        selected: 'kpd',
+        options: [...Roles, {title: 'КПД', value: 'kpd'}],
         columns: [
           {
             field: 'id',
@@ -134,6 +149,17 @@
             field: 'kpd',
             label: 'КПД игрока',
           },
+          {
+            field: 'role',
+            label: 'Роль игрока',
+          },
+        ],
+        tagTypes: [
+          {value: 1, tag: 'is-dark'},
+          {value: 2, tag: 'is-primary'},
+          {value: 3, tag: 'is-danger'},
+          {value: 4, tag: 'is-info'},
+          {value: 5, tag: 'is-success'},
         ]
       }
     },
@@ -147,7 +173,11 @@
             id_team
           }
         })
-      }
+      },
+      getTagType(val) {
+        if (!val) return ;
+        return this.tagTypes.find(t => t.value === val).tag
+      },
     }
   }
 </script>
