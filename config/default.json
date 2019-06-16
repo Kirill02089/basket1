@@ -44,5 +44,7 @@
       "httpOnly": false,
       "secure": false
     }
-  }
+  },
+  "mysql": "mysql://root:@localhost:3306/test",
+  "postgres": "postgres://postgres:@localhost:5432/test"
 }

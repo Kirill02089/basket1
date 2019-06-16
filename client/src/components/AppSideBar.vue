@@ -1,9 +1,9 @@
 <template>
   <div class="AppSideBar has-background-white-ter">
     <div class="BroadcastInfo-container"
-         v-for="br in broadcasts"
+         v-for="(br, index) in broadcasts"
          @click="toBroadcast(br)">
-      <broadcast-info :broadcast="br"/>
+      <broadcast-info :broadcast="br" :class="{'next': index > 0}"/>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
     },
     methods: {
       toBroadcast(broadcast) {
-        this.$router.replace({name: 'broadcast', params: { id: broadcast.id }});
+        this.$router.replace({name: 'broadcast', params: {id: broadcast.id}});
       }
     }
   }
@@ -35,6 +35,10 @@
 
     .BroadcastInfo-container {
       margin: 10px 10px;
+
+      .BroadcastInfo.next {
+        background: hsl(171, 100%, 41%);
+      }
     }
   }
 </style>

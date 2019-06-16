@@ -1,16 +1,18 @@
 <template>
   <div class="BroadcastInfo box">
     <div class="BroadcastInfo-images">
-<!--      <figure class="image is-64x64">-->
-<!--        <img class="is-rounded" :src="'../../assets/images/' + broadcast.teams[0].img"/>-->
-<!--      </figure>-->
-<!--      <figure class="image is-64x64">-->
-<!--        <img class="is-rounded" src=""/>-->
-<!--      </figure>-->
-<!--      <img :src="'../../assets/images/' + broadcast.teams[0].img" alt="">-->
-<!--      <img :src="'../../assets/images/' + broadcast.teams[1].img" alt="">-->
+      <figure class="image is-64x64">
+        <img class="is-rounded" :src="'images/' + broadcast.teams[0].img"/>
+      </figure>
+      <figure class="image is-64x64">
+        <img class="is-rounded" :src="'images/' + broadcast.teams[1].img"/>
+      </figure>
+
     </div>
-    <div class="BroadcastInfo-title">{{broadcastTitle}}</div>
+    <div class="BroadcastInfo-title">
+      <span>{{this.broadcast.teams[0].title}}</span>
+      <span>{{this.broadcast.teams[1].title}}</span>
+    </div>
     <div class="BroadcastInfo-info">
       <div class="BroadcastInfo-info_score">{{broadcastScore}}</div>
       <div class="BroadcastInfo-info_start-date">{{start_date}}</div>
@@ -61,7 +63,13 @@
     }
 
     &-title {
+      width: 100%;
       margin-top: 15px;
+      display: flex;
+      justify-content: space-evenly;
+      span {
+        width: 40px;
+      }
     }
 
     &-images {

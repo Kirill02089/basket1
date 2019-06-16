@@ -2,25 +2,13 @@
   <form action="">
     <div class="modal-card" style="width: auto">
       <header class="modal-card-head">
-        <p class="modal-card-title">Игрок</p>
+        <p class="modal-card-title">Команда</p>
+        <figure class="image is-64x64">
+          <img :src="'images/' + currentTeam.img"/>
+        </figure>
       </header>
       <section class="modal-card-body">
-        <b-field label="ФИО">
-          <b-input
-            disabled
-            :value="player.fio"
-            required>
-          </b-input>
-        </b-field>
-
-        <b-field label="Команда">
-          <b-input
-            type="email"
-            disabled
-            :value="teamss[player.id_team].title"
-            required>
-          </b-input>
-        </b-field>
+        <players-list :players="currentTeam.players"></players-list>
       </section>
       <footer class="modal-card-foot">
         <button class="button" type="button" @click="$parent.close()">Закрыть</button>
@@ -31,12 +19,15 @@
 
 <script>
   import {Teams} from "../store/data";
+  import PlayersList from "./PlayersList";
 
   export default {
-    name: "PlayerForm",
-    props: {
-      player: {
-        type: Object
+    name: "TeamForm",
+    components: {PlayersList},
+    props: ['id_team'],
+    computed: {
+      currentTeam() {
+        return this.teamss.find(t => t.id_team === this.id_team)
       }
     },
     data() {
