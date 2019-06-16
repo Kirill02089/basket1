@@ -8,6 +8,9 @@
       <div class="column body">
         <router-view/>
       </div>
+      <div class="column is-one-fifth">
+        <AppAdd/>
+      </div>
     </div>
   </div>
 </template>
@@ -15,9 +18,10 @@
 <script>
   import AppNav from "./components/AppNav";
   import AppSideBar from "./components/AppSideBar";
+  import AppAdd from "./components/AppAdd";
 
   export default {
-    components: {AppNav,AppSideBar}
+    components: {AppAdd, AppNav, AppSideBar}
   }
 </script>
 
